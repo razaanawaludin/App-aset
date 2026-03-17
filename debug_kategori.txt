@@ -1,0 +1,43 @@
+05:50:46 - Controller loaded
+POST: Array
+(
+)
+
+GET: Array
+(
+    [pg] => kkategori
+    [fl] => list
+)
+
+Data count: 0
+---
+05:51:18 - Controller loaded
+POST: Array
+(
+    [kode] => ELK
+    [nama] => iphonk
+    [deskripsi] => well
+    [Btn] => Simpan
+)
+
+GET: Array
+(
+    [pg] => kkategori
+    [fl] => list
+)
+
+Masuk ke blok Simpan
+Exception: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Deskripsi' in 'field list'
+05:51:18 - Controller loaded
+POST: Array
+(
+)
+
+GET: Array
+(
+    [pg] => kkategori
+    [fl] => list
+)
+
+Data count: 0
+---

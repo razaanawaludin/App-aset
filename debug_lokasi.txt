@@ -1,0 +1,2 @@
+INSERT ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'KodeLokasi' in 'field list'
+INSERT ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'KodeLokasi' in 'field list'
