@@ -1,0 +1,4 @@
+2026-04-01 08:48:03 - Insert BAST Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'db_asset.bast' doesn't exist
+2026-04-01 08:50:33 - Insert BAST Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'db_asset.bast' doesn't exist
+2026-04-01 08:51:11 - Insert BAST Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'db_asset.bast' doesn't exist
+2026-04-01 09:03:16 - Insert BAST Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'db_asset.bast' doesn't exist

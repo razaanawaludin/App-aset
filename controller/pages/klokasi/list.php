@@ -2,23 +2,44 @@
 $id = $_GET['id'] ?? '';
 $btn = $_POST['Btn'] ?? '';
 
-// Tambah lokasi
+// Fungsi generate kode otomatis untuk lokasi
+function generateKodeLokasi($koneksiku) {
+    try {
+        $stmt = $koneksiku->query("SELECT MAX(IdLokasiAset) as maxId FROM lokasi_aset");
+        $result = $stmt->fetch();
+        $nextId = ($result['maxId'] ?? 0) + 1;
+        return 'LOK' . str_pad($nextId, 3, '0', STR_PAD_LEFT);
+    } catch (Exception $e) {
+        return 'LOK001';
+    }
+}
+
+// Tambah atau Edit lokasi
 if ($btn === 'Simpan') {
-    $kode = $_POST['kode'] ?? '';
     $nama = $_POST['lokasi'] ?? '';
 
-    if (!empty($kode) && !empty($nama)) {
+    if (!empty($nama)) {
         try {
-            $dataBaru = [
-                'KodeLokasi'  => $kode,
-                'NamaLokasi'  => $nama
-            ];
+            if ($ak === 'edit' && !empty($id)) {
+                // Update lokasi
+                $dataUpdate = [
+                    'NamaLokasiAset' => $nama
+                ];
+                $kondisi = ['IdLokasiAset' => $id];
+                $simpan = updateData($koneksiku, 'lokasi_aset', $dataUpdate, $kondisi);
+            } else {
+                // Tambah lokasi baru
+                $kodeOtomatis = generateKodeLokasi($koneksiku);
+                $dataBaru = [
+                    'KodeLokasiAset'  => $kodeOtomatis,
+                    'NamaLokasiAset'  => $nama
+                ];
+                $simpan = insertData($koneksiku, 'lokasi_aset', $dataBaru);
+            }
 
-            $simpan = insertData($koneksiku, 'lokasi_aset', $dataBaru);
             $_SESSION['alert'] = $simpan ? "SimpanBerhasil" : "SimpanGagal";
         } catch (Exception $e) {
-            // Jika kolom tidak cocok, coba dengan struktur berbeda
-            file_put_contents('debug_lokasi.txt', "INSERT ERROR: " . $e->getMessage() . "\n", FILE_APPEND);
+            file_put_contents('debug_lokasi.txt', "INSERT/UPDATE ERROR: " . $e->getMessage() . "\n", FILE_APPEND);
             $_SESSION['alert'] = "SimpanGagal";
         }
     } else {
@@ -32,7 +53,7 @@ if ($btn === 'Simpan') {
 // Hapus lokasi
 if ($ak === 'hapus' && !empty($id)) {
     try {
-        $kondisi = ['IdLokasi' => $id];
+        $kondisi = ['IdLokasiAset' => $id];
         $hapus = deleteData($koneksiku, 'lokasi_aset', $kondisi);
         $_SESSION['alert'] = $hapus ? "HapusBerhasil" : "HapusGagal";
     } catch (Exception $e) {
@@ -44,4 +65,22 @@ if ($ak === 'hapus' && !empty($id)) {
 
 // Ambil data
 try { $semuaLokasi = selectData($koneksiku, 'lokasi_aset'); } catch (Exception $e) { $semuaLokasi = []; }
+
+// Generate kode otomatis untuk form
+$kodeLokasiOtomatis = generateKodeLokasi($koneksiku);
+
+// Untuk edit: ambil data yang akan diedit
+$edit_kode_val = '';
+$edit_nama_val = '';
+
+if ($ak === 'edit' && !empty($id)) {
+    try {
+        $kondisi = ['IdLokasiAset' => $id];
+        $hasil = selectData($koneksiku, 'lokasi_aset', $kondisi);
+        if (!empty($hasil)) {
+            $edit_kode_val = $hasil[0]['KodeLokasiAset'] ?? '';
+            $edit_nama_val = $hasil[0]['NamaLokasiAset'] ?? '';
+        }
+    } catch (Exception $e) {}
+}
 ?>

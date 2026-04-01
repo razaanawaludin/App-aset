@@ -1,1 +1,113 @@
 Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+05:44:59 POST: Array
+(
+    [kode_aset] => 12
+    [nama_aset] => 2
+    [kategori] => Furniture
+    [lokasi] => rps
+    [btn] => Simpan
+)
+
+Insert data: Array
+(
+    [KodeAset] => 12
+    [NamaAset] => 2
+    [Kategori] => Furniture
+    [Lokasi] => rps
+    [FotoAset] => 
+)
+
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+06:05:43 POST: Array
+(
+    [kode_aset] => AST002
+    [nama_aset] => Laptop Asus ROG
+    [kategori] => Laptop
+    [lokasi] => Meeting room
+    [btn] => Simpan
+)
+
+Insert data: Array
+(
+    [KodeAset] => AST002
+    [NamaAset] => Laptop Asus ROG
+    [Kategori] => Laptop
+    [Lokasi] => Meeting room
+    [FotoAset] => aset_1774929943.png
+)
+
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+06:07:16 POST: Array
+(
+    [kode_aset] => AST003
+    [nama_aset] => PC 02-457
+    [kategori] => Pc
+    [lokasi] => Server
+    [btn] => Simpan
+)
+
+Insert data: Array
+(
+    [KodeAset] => AST003
+    [NamaAset] => PC 02-457
+    [Kategori] => Pc
+    [Lokasi] => Server
+    [FotoAset] => aset_1774930036.jpg
+)
+
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+06:10:54 POST: Array
+(
+    [kode_aset] => AST004
+    [nama_aset] => PC 05-554
+    [kategori] => Pc
+    [lokasi] => Lobby admin
+    [btn] => Simpan
+)
+
+Insert data: Array
+(
+    [KodeAset] => AST004
+    [NamaAset] => PC 05-554
+    [Kategori] => Pc
+    [Lokasi] => Lobby admin
+    [FotoAset] => aset_1774930254.jpg
+)
+
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+06:15:08 POST: Array
+(
+    [kode_aset] => AST005
+    [nama_aset] => MacBook v6 s
+    [kategori] => Laptop
+    [lokasi] => Meeting room
+    [btn] => Simpan
+)
+
+Insert data: Array
+(
+    [KodeAset] => AST005
+    [NamaAset] => MacBook v6 s
+    [Kategori] => Laptop
+    [Lokasi] => Meeting room
+    [FotoAset] => aset_1774930508.png
+)
+
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset
+Kolom tabel: IdAset, KodeAset, NamaAset, Kategori, Lokasi, FotoAset

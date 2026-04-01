@@ -194,33 +194,99 @@
     {
         echo <<<qr
             <div class="modal fade" id="modalCetakQR" tabindex="-1" aria-hidden="true" style="z-index: 1060;">
-                <div class="modal-dialog modal-dialog-centered modal-sm">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content border-0 shadow-lg" style="border-radius: 16px;">
-                        <div class="modal-header border-0 pb-0">
-                            <h6 class="modal-title fw-bold">Cetak QR Code</h6>
+                        <div class="modal-header border-0 pb-0 px-4 pt-4">
+                            <h6 class="modal-title fw-bold">
+                                <i data-lucide="qr-code" style="width: 20px; margin-bottom: 2px;" class="me-1 text-primary"></i> QR Code Aset
+                            </h6>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         
-                        <div class="modal-body text-center" id="areaCetak">
-                            <div class="p-4 border border-2 rounded-3 mb-2 d-inline-block bg-white" style="border-style: dashed !important; border-color: #ccc;">
-                                <div class="fw-bold text-uppercase small mb-3" style="letter-spacing: 1px;">INVENTARIS ASET</div>
-                                
-                                <div class="d-flex justify-content-center mb-2">
-                                    <div id="qrcode"></div>
+                        <!-- Tab Navigation -->
+                        <div class="px-4 pt-3">
+                            <ul class="nav nav-pills nav-fill gap-2 p-1 rounded-3" style="background: #f1f5f9;" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active rounded-3 fw-bold small py-2" id="tab-generate" data-bs-toggle="pill" data-bs-target="#pane-generate" type="button" role="tab" style="font-size: 0.8rem;">
+                                        <i data-lucide="qr-code" style="width: 14px; margin-bottom: 1px;" class="me-1"></i> QR Code
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link rounded-3 fw-bold small py-2" id="tab-scan" data-bs-toggle="pill" data-bs-target="#pane-scan" type="button" role="tab" style="font-size: 0.8rem;">
+                                        <i data-lucide="scan" style="width: 14px; margin-bottom: 1px;" class="me-1"></i> Scan
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="tab-content">
+                            <!-- Tab: Generate QR -->
+                            <div class="tab-pane fade show active" id="pane-generate" role="tabpanel">
+                                <div class="modal-body text-center px-4 py-3" id="areaCetak">
+                                    <div class="p-4 border border-2 rounded-3 mb-3 d-inline-block bg-white" style="border-style: dashed !important; border-color: #dee2e6;">
+                                        <div class="fw-bold text-uppercase small mb-3" style="letter-spacing: 1px; color: #6366f1;">INVENTARIS ASET</div>
+                                        
+                                        <div class="d-flex justify-content-center mb-2">
+                                            <div id="qrcode"></div>
+                                        </div>
+                                        
+                                        <div class="mt-2">
+                                            <span id="labelKode" class="d-block text-muted small" style="font-size: 0.75rem;"></span>
+                                            <span id="labelNamaAset" class="d-block fw-bold text-dark" style="font-size: 0.85rem;"></span>
+                                        </div>
+                                    </div>
                                 </div>
-                                
-                                <div class="mt-2">
-                                    <span id="labelKode" class="d-block text-muted small" style="font-size: 0.75rem;"></span>
-                                    <span id="labelNamaAset" class="d-block fw-bold text-dark" style="font-size: 0.85rem;"></span>
+
+                                <div class="px-4 pb-4">
+                                    <div class="d-flex gap-2">
+                                        <button type="button" class="btn btn-primary flex-fill rounded-3 fw-bold shadow-sm" onclick="printLabel()">
+                                            <i data-lucide="printer" class="me-1" style="width: 16px;"></i> Print
+                                        </button>
+                                        <button type="button" class="btn btn-success flex-fill rounded-3 fw-bold shadow-sm" onclick="downloadQR()">
+                                            <i data-lucide="download" class="me-1" style="width: 16px;"></i> Download
+                                        </button>
+                                        <button type="button" class="btn btn-info flex-fill rounded-3 fw-bold shadow-sm text-white" onclick="shareQR()">
+                                            <i data-lucide="share-2" class="me-1" style="width: 16px;"></i> Bagikan
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tab: Scan QR -->
+                            <div class="tab-pane fade" id="pane-scan" role="tabpanel">
+                                <div class="modal-body px-4 py-3">
+                                    <div id="qr-reader-container" class="rounded-3 overflow-hidden mb-3" style="background: #000;">
+                                        <div id="qr-reader" style="width: 100%;"></div>
+                                    </div>
+
+                                    <!-- Scan Result -->
+                                    <div id="scanResult" style="display: none;">
+                                        <div class="p-3 rounded-3 border" style="background: #f0fdf4; border-color: #bbf7d0 !important;">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="d-inline-flex align-items-center justify-content-center bg-success rounded-circle me-2" style="width: 28px; height: 28px;">
+                                                    <i data-lucide="check" class="text-white" style="width: 14px;"></i>
+                                                </div>
+                                                <span class="fw-bold text-success small">QR Code Terdeteksi!</span>
+                                            </div>
+                                            <div class="bg-white rounded-2 p-2 mt-2">
+                                                <code id="scanResultText" class="text-dark small fw-bold" style="word-break: break-all;"></code>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="scanPlaceholder" class="text-center py-3">
+                                        <p class="text-muted small mb-2">Arahkan kamera ke QR Code aset</p>
+                                        <button type="button" class="btn btn-outline-primary rounded-pill px-4 fw-bold" id="btnStartScan" onclick="startQRScanner()">
+                                            <i data-lucide="camera" style="width: 16px; margin-bottom: 1px;" class="me-1"></i> Mulai Scan
+                                        </button>
+                                        <button type="button" class="btn btn-outline-danger rounded-pill px-4 fw-bold" id="btnStopScan" onclick="stopQRScanner()" style="display:none;">
+                                            <i data-lucide="camera-off" style="width: 16px; margin-bottom: 1px;" class="me-1"></i> Stop Scan
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="modal-footer border-0 pt-0">
-                            <button type="button" class="btn btn-primary w-100 rounded-3 fw-bold" onclick="printLabel()">
-                                <i data-lucide="printer" class="me-1" style="width: 16px;"></i> Print
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>

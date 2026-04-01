@@ -1,4 +1,10 @@
 <?php
+    $isEdit = ($ak === 'edit' && !empty($id));
+    $formTitle = $isEdit ? "Edit Lokasi" : "Tambah Lokasi";
+    $kodeValue = $isEdit ? $edit_kode_val : $kodeLokasiOtomatis;
+    $namaValue = $isEdit ? $edit_nama_val : '';
+    $formAction = $isEdit ? "?pg=$pg&fl=$fl&ak=edit&id=$id" : "?pg=$pg&fl=$fl";
+
     PageHeader(
         "Lokasi",
         "Pengelolaan titik penempatan dan distribusi fisik aset"
@@ -13,20 +19,32 @@
                 $BtnSimpan = button("Btn","Simpan","primary","save","");
                 PageContentForm(
                     <<<a
-                        <form method="POST" autocomplete="off">
+                        <form method="POST" action="$formAction" autocomplete="off">
                         
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="fw-bold text-dark mb-0" style="font-size: 0.95rem;">
+                                    <i data-lucide="<?= $isEdit ? 'pencil' : 'plus-circle' ?>" style="width: 16px; margin-bottom: 2px;" class="me-1 text-primary"></i>
+                                    $formTitle
+                                </h6>
+                                <?php if ($isEdit): ?>
+                                    <a href="?pg=$pg&fl=$fl" class="btn btn-outline-secondary btn-sm rounded-pill px-3" style="font-size: 0.75rem;">
+                                        <i data-lucide="x" style="width: 12px; margin-bottom: 1px;" class="me-1"></i> Batal
+                                    </a>
+                                <?php endif; ?>
+                            </div>
+
                             <div class="mb-4">
                                 <label class="form-label small fw-bold text-secondary text-uppercase" style="letter-spacing: 0.5px;">
                                     <i data-lucide="hash" style="width: 14px; margin-bottom: 2px;" class="me-1"></i> Kode Lokasi
                                 </label>
-                                <input type="text" name="kode" class="form-control form-control-lg bg-light border-0 fs-6" placeholder="Contoh : JBRT001" style="border-radius: 10px;" required>
+                                <input type="text" name="kode" value="$kodeValue" class="form-control form-control-lg bg-light border-0 fs-6" style="border-radius: 10px;" readonly>
                             </div>
 
                             <div class="mb-4">
                                 <label class="form-label small fw-bold text-secondary text-uppercase" style="letter-spacing: 0.5px;">
                                     <i data-lucide="map-pinned" style="width: 14px; margin-bottom: 2px;" class="me-1"></i> Nama Lokasi
                                 </label>
-                                <input type="text" name="lokasi" class="form-control form-control-lg bg-light border-0 fs-6" placeholder="Contoh : Ruang Server Lt. 2" style="border-radius: 10px;" required>
+                                <input type="text" name="lokasi" value="$namaValue" class="form-control form-control-lg bg-light border-0 fs-6" placeholder="Contoh : Ruang Server Lt. 2" style="border-radius: 10px;" required>
                             </div>
 
                             <div class="d-grid mt-5">
@@ -43,11 +61,13 @@
              <?php
                 $barisTabel = "";
                 foreach ($semuaLokasi as $lok) {
-                    $namaLok = $lok['NamaLokasi'] ?? $lok['Lokasi'] ?? '';
-                    $kodeLok = $lok['KodeLokasi'] ?? $lok['Kode'] ?? '';
-                    $idLok = $lok['IdLokasi'] ?? '';
+                    $namaLok = $lok['NamaLokasiAset'] ?? $lok['NamaLokasi'] ?? $lok['Lokasi'] ?? '';
+                    $kodeLok = $lok['KodeLokasiAset'] ?? $lok['KodeLokasi'] ?? $lok['Kode'] ?? '';
+                    $idLok = $lok['IdLokasiAset'] ?? $lok['IdLokasi'] ?? '';
 
                     $BtnAksi = AksiDropdown([
+                        ["","?pg=$pg&fl=$fl&ak=edit&id=$idLok", "pencil", "Edit"],
+                        ["hr"],
                         ["hapus", "#", "trash-2", "Hapus", "danger", "konfirmasiHapus('?pg=$pg&fl=$fl&ak=hapus&id=$idLok')"]
                     ]);
 

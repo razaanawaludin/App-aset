@@ -27,8 +27,8 @@ if ($idUser) {
         <div class="dropdown">
             <div class="d-flex align-items-center gap-3 cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
                 <div class="text-end d-none d-sm-block">
-                    <p class="mb-0 fw-bold small"><?= $headeruser['Nama'] ?></p>
-                    <!-- <p class="mb-0 text-muted" style="font-size: 0.7rem;">Super Admin</p> -->
+                    <p class="mb-0 fw-bold small"><?= htmlspecialchars($headeruser['Nama'] ?? '') ?></p>
+                    <p class="mb-0 text-muted text-capitalize" style="font-size: 0.7rem;"><?= htmlspecialchars($headeruser['Role'] ?? 'Tidak Ada Role') ?></p>
                 </div>
                 <img src="https://ui-avatars.com/api/?name=<?= $headeruser['Nama'] ?>&background=random&color=fff" width="40" height="40" class="rounded-circle border border-2 border-white shadow-sm">
             </div>

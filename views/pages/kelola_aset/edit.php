@@ -86,6 +86,23 @@ prev;
                     </div>
                 </div>
 
+                <div class="row g-4 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold text-secondary" style="font-size: 0.75rem; letter-spacing: 0.5px; text-transform: uppercase;">Kondisi Aset</label>
+                        <div class="position-relative">
+                            <select name="kondisi" class="form-select form-select-lg bg-light border-0 fs-6 ps-5 text-dark" style="border-radius: 10px; cursor: pointer;" required>
+                                <option value="Baik" <?= ($kondisi_val === 'Baik') ? 'selected' : '' ?>>✅ Baik</option>
+                                <option value="Kurang Baik" <?= ($kondisi_val === 'Kurang Baik') ? 'selected' : '' ?>>⚠️ Kurang Baik</option>
+                                <option value="Rusak Ringan" <?= ($kondisi_val === 'Rusak Ringan') ? 'selected' : '' ?>>🔧 Rusak Ringan</option>
+                                <option value="Rusak Berat" <?= ($kondisi_val === 'Rusak Berat') ? 'selected' : '' ?>>❌ Rusak Berat</option>
+                            </select>
+                            <div class="position-absolute top-50 start-0 translate-middle-y ps-3 text-muted">
+                                <i data-lucide="heart-pulse" style="width: 18px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="mb-5">
                     <label class="form-label fw-bold text-secondary" style="font-size: 0.75rem; letter-spacing: 0.5px; text-transform: uppercase;">Foto Aset</label>
                     $previewFoto

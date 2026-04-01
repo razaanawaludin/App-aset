@@ -17,6 +17,7 @@
             {
                 $_SESSION['status']='OKE';
                 $_SESSION['IdUser'] = $quser[0]['IdPegawai'];
+                $_SESSION['Role'] = strtolower($quser[0]['Role']);
                 header('Location:index.php'); 
             }
             else

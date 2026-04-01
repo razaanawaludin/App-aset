@@ -12,6 +12,7 @@ if ($btn === 'Simpan') {
     $nama_aset  = $_POST['nama_aset'] ?? '';
     $kategori   = $_POST['kategori'] ?? '';
     $lokasi     = $_POST['lokasi'] ?? '';
+    $kondisi    = $_POST['kondisi'] ?? 'Baik';
 
     $namaFoto = '';
     if (isset($_FILES['foto_aset']) && $_FILES['foto_aset']['error'] === UPLOAD_ERR_OK) {
@@ -25,10 +26,11 @@ if ($btn === 'Simpan') {
     }
 
     $dataUpdate = [
-        'KodeAset'  => $kode_aset,
-        'NamaAset'  => $nama_aset,
-        'Kategori'  => $kategori,
-        'Lokasi'    => $lokasi
+        'KodeAset'    => $kode_aset,
+        'NamaAset'    => $nama_aset,
+        'Kategori'    => $kategori,
+        'Lokasi'      => $lokasi,
+        'KondisiAset' => $kondisi
     ];
     if (!empty($namaFoto)) {
         $dataUpdate['FotoAset'] = $namaFoto;
@@ -51,6 +53,7 @@ $kode_val = '';
 $nama_val = '';
 $kategori_val = '';
 $lokasi_val = '';
+$kondisi_val = 'Baik';
 $foto_val = '';
 
 if (!empty($id)) {
@@ -63,6 +66,7 @@ if (!empty($id)) {
             $nama_val     = $data['NamaAset'];
             $kategori_val = $data['Kategori'];
             $lokasi_val   = $data['Lokasi'];
+            $kondisi_val  = $data['KondisiAset'] ?? 'Baik';
             $foto_val     = $data['FotoAset'];
         }
     } catch (Exception $e) {}
